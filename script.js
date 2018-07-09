@@ -65,7 +65,7 @@ flatpickr('#datepicker', {
   onChange: function(_, dateStr) {
     render(currentData)
     const previousDates = currentData
-    const selectedDates = dateStr.split(',')
+    const selectedDates = dateStr.split(', ')
     const alreadySelectedDates = previousDates.map(item => item.date)
 
     currentData = selectedDates.map(item => {
