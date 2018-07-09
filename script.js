@@ -1,3 +1,5 @@
+import flatpickr from 'flatpickr'
+
 const destEl = document.querySelector('#dest-element')
 const timeRangesWrapper = document.querySelector('#time-ranges')
 const ranges = ['10-12', '12-14', '14-16', '16-18', '18-20', '20-22']
