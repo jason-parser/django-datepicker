@@ -10,20 +10,21 @@ const render = data => {
   timeRangesWrapper.innerHTML = ''
 
   data = data.sort(function(a, b) {
-    return new Date(a.date) - new Date(b.date);
+    return new Date(a.date) - new Date(b.date)
   })
 
   data.forEach(item => {
     const newEl = document.createElement('div')
 
     const label = document.createElement('p')
-    label.textContent = item.date
+    label.classList.add('date')
+    label.textContent = `Временные слоты для ${item.date}`
 
     const checkboxesWrapper = document.createElement('div')
     checkboxesWrapper.classList.add('checkboxes')
 
     ranges.forEach(range => {
-      const rangeLabel = document.createElement('p')
+      const rangeLabel = document.createElement('label')
       rangeLabel.textContent = range
 
       const rangeInput = document.createElement('input')
@@ -40,9 +41,8 @@ const render = data => {
 
         updateValue(data)
       })
-
+      rangeLabel.appendChild(rangeInput)
       checkboxesWrapper.appendChild(rangeLabel)
-      checkboxesWrapper.appendChild(rangeInput)
     })
 
     newEl.appendChild(label)
@@ -58,7 +58,7 @@ const updateValue = data => {
   destEl.value = JSON.stringify(data)
 }
 
-flatpickr('#datepicker', {
+const calendar = flatpickr('#datepicker', {
   mode: 'multiple',
   dateFormat: 'Y-m-d',
   defaultDate: currentData.map(item => item.date),
@@ -84,3 +84,8 @@ flatpickr('#datepicker', {
 })
 
 render(currentData)
+
+document.querySelector('#manual-button').addEventListener('click', e => {
+  e.preventDefault()
+  calendar.open()
+})
